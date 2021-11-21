@@ -4,15 +4,14 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4 img-cover">
-                    <img :src="`https://chapterone.qodeinteractive.com/wp-content/uploads/2019/07/product-2.jpg`" height="500" width="390" alt="cover_img" srcset="">
+                    <img :src="`${item.cover}`" height="500" width="390" alt="cover_img" srcset="">
                 </div>
                 <div class="col-md-8 info">
-                    <h2>Symphony Of Trilogy</h2>
-                    <h5>Tac gia: JESSICA JOHNSON</h5>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium ducimus odit libero ad veniam harum architecto vero facilis autem sint eum excepturi pariatur laboriosam saepe delectus natus, ut dolorum. Ab.
-                    Quibusdam id officiis eos pariatur labore dolore voluptatem explicabo vero, nesciunt neque consequuntur enim sed sint provident autem beatae dolor excepturi dicta doloribus cumque quam? Architecto dolor ad molestiae ipsam.</p>
-                    <p class="price">19.99$</p>
-                    So luong <input type="number" value="0" min="0" max="20" step="1"/> <button type="button" class="btn btn-danger">Them vao gio hang</button>
+                    <h2>{{ item.title }}</h2>
+                    <h5>Tac gia: {{ item.author }}</h5>
+                    <p>{{ item.desc }}</p>
+                    <p class="price">{{ item.price }} vnd</p>
+                    So luong <input type="number" value="0" min="0" max="20" step="1"/> <button type="button" class="btn btn-danger" @click="addToCart">Them vao gio hang</button>
                 </div>
                 
             </div>
@@ -28,6 +27,77 @@ export default {
     name:"ViewItem",
     components: {
         Header
+    },
+    props: [
+        "id"
+    ],
+    data() {
+        return {
+            item: null,
+            items: [
+                {
+                title: "50 Ways to Draw Your Beautiful, Ordinary Life: Practical Lessons in",
+                id: 1,
+                author: "Paperback",
+                price: 580000,
+                cover:"https://bizweb.dktcdn.net/thumb/large/100/282/917/products/9781523501151.jpg?v=1634361107000",
+                desc: "",
+                number: 0,
+                category: []
+                },
+                {
+                title: "Great World Writers Twentieth Century - Patrick M.O'neil",
+                author: "Hardcover - Rare",
+                price: 240000,
+                id: 2,
+                cover:"https://bizweb.dktcdn.net/thumb/large/100/282/917/products/z2881714372397-6e76a1433ffec29c5d8cc256df7c7c05.jpg?v=1635741227000",
+                desc: "",
+                number: 0,
+                category: []
+                },
+                {
+                title: "Tiny Habits: The Small Changes That Change Everything by BJ",
+                author: "Hardcover",
+                price: 580000,
+                id: 3,
+                cover:"https://bizweb.dktcdn.net/thumb/large/100/282/917/products/9780358003328.jpg?v=1634361674000",
+                desc: "",
+                number: 0,
+                category: []
+                },
+                {
+                title: "Great World Writers Twentieth Century - Patrick M.O'neil",
+                author: "Hardcover - Rare",
+                price: 240000,
+                id: 4,
+                cover:"https://bizweb.dktcdn.net/thumb/large/100/282/917/products/9781401308278.jpg?v=1634361936000",
+                desc: "",
+                number: 0,
+                category: []
+                },
+                {
+                title: "Ninth House by Leigh Bardugo",
+                author: "Paperback",
+                price: 580000,
+                id: 5,
+                cover:"https://bizweb.dktcdn.net/thumb/large/100/282/917/products/9781250313072-4cda6be8-dcfd-40e1-9d6b-e04383579cb4.jpg?v=1634361795000",
+                desc: "",
+                number: 0,
+                category: []
+                },
+                
+            ],
+        }
+    },
+    methods: {
+        addToCart(){
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            // cart.push({id})
+            console.log(cart);
+        }
+    },
+    created() {
+        this.item = this.items[this.$route.params.id-1];
     }
 }
 </script>

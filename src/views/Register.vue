@@ -1,18 +1,19 @@
 <template>
-    
     <div class="container-fluid">
         <Header />
+    <div class="container">
         <div class="edit-form">
             <div v-if="message">
                 {{ message }}
             </div>
-            <h4>Đăng kí tài khoản</h4>
+            <h5 class="flex-center h5-text-auth">Đăng kí tài khoản</h5>
             <AuthForm
             :user="user"
             :isLogin="false"
             @user-submit="handleRegister"
             />
         </div>
+    </div>
     </div>
     <Footer />
 </template>
@@ -62,5 +63,7 @@ export default {
 </script>
 
 <style>
-
+.h5-text-auth {
+    font-weight: 400;
+}
 </style>

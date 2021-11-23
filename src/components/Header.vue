@@ -5,10 +5,11 @@
         <input class="form-control ms-4 mt-3" type="search" placeholder="Search" aria-label="Search">
       </form>
       <router-link :to="`/`"><img :src="require(`../assets/Logo.png`)" height="65" alt="logo" class="logo"/></router-link>
+        <a v-if="loggedInUser" class="flex-center username-text" @click.prevent="logout"> {{ loggedInUser.username }} </a>
+        <a v-if="loggedInUser" class="flex-center logout" @click.prevent="logout"> Đăng xuất </a>
       <div>
-        
-          <router-link v-if="!currentUser" :to="`/login`" class="link">Đăng nhập</router-link>
-          <router-link v-if="!currentUser" :to="`/register`" class="link">Đăng kí</router-link>
+          <router-link v-if="!loggedInUser" :to="`/login`" class="link">Đăng nhập</router-link>
+          <router-link v-if="!loggedInUser" :to="`/register`" class="link">Đăng kí</router-link>
 
         <router-link :to="`/cart`">
           <a class="cart"><ThemifyIcon icon="bag" class="icon-cart"/>
@@ -24,7 +25,7 @@
 
 <script>
 import ThemifyIcon from "vue-themify-icons";
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 
 export default {
   name: 'Header',
@@ -37,24 +38,33 @@ export default {
     };
   },
   methods: {
+    ...mapMutations([
+            "initAuthState" 
+        ]),
     logout() {
-      console.log("logout");
+      this.$store.commit("logout");
+      this.$router.push("login");
     }
   },
   computed: {
         ...mapGetters([
-            "getProductInCart"
+            "getProductInCart",
+            "loggedInUser"
         ]),
   },
+  mounted() {
+    this.initAuthState();
+  }
 }
 </script>
 
 <style>
 .header {
-  background: rgb(245, 213, 213);
+  /* background: rgb(245, 213, 213); */
   height: 80px;
   display: flex;
   align-items: center;
+  margin-bottom: 32px;
 }
 .logo {
   margin-right: 270px;
@@ -96,6 +106,21 @@ export default {
   font-size: 20px;
   padding: 8px;
   line-height: 3.5;
+}
+.username-text, .logout {
+  color: black;
+  text-decoration: none;
+  font-size: 20px;
+  padding: 8px;
+  line-height: 2.5;
+}
+.username-text {
+  margin-right: -84px;
+}
+.logout{
+  font-size: 17px;
+  line-height: 2.5;
+  color: rgb(214, 64, 64);
 }
 .search {
   width: 24%;

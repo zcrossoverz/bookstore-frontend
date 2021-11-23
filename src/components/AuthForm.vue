@@ -1,41 +1,48 @@
 <template>
-    <Form
-    :validation-schema="schema"
-    >
-        <div class="form-group">
-            <label for="username">Tên đăng nhập</label>
-            <Field
-            name="username"
-            type="text"
-            class="form-control"
-            v-model="userData.username"
-            />
-            <ErrorMessage name="username" class="error-feedback" />
-        </div>
-        <div class="form-group" v-if="!isLogin">
-            <label for="email">E-mail</label>
-            <Field
-            name="email_user"
-            type="text"
-            class="form-control"
-            v-model="userData.email"
-            />
-        </div>
-        <div class="form-group">
-            <label for="password">Mật khẩu</label>
-            <Field
-            name="password"
-            type="current-password"
-            class="form-control"
-            v-model="userData.password"
-            />
-            <ErrorMessage name="password" class="error-feedback" />
-        </div>
-        <div class="form-group">
-            <button v-if="isLogin" class="btn btn-primary" @click="$emit('user-submit', userData)">Đăng nhập</button>
-            <button v-else class="btn btn-primary" @click="$emit('user-submit', userData)">Đăng kí</button>
-        </div>
-    </Form>
+<div class="form-auth">
+    <div class="form-container">
+        <Form
+        :validation-schema="schema"
+        >
+            <div class="form-group">
+                <Field
+                name="username"
+                type="text"
+                class="form-control"
+                placeholder="Username"
+                v-model="userData.username"
+                />
+                <ErrorMessage name="username" class="error-feedback" />
+            </div>
+            <div class="form-group" v-if="!isLogin">
+                <Field
+                name="email_user"
+                type="text"
+                class="form-control"
+                placeholder="Email"
+                v-model="userData.email"
+                />
+                <ErrorMessage name="email_user" class="error-feedback" />
+            </div>
+            <div class="form-group">
+                <Field
+                name="password"
+                type="current-password"
+                class="form-control"
+                placeholder="Password"
+                v-model="userData.password"
+                />
+                <ErrorMessage name="password" class="error-feedback" />
+            </div>
+            <div class="form-group">
+                <div class="flex-center">
+                    <button v-if="isLogin" class="btn btn-primary btn-login" @click="$emit('user-submit', userData)">Đăng nhập</button>
+                    <button v-else class="btn btn-primary btn-login" @click="$emit('user-submit', userData)">Đăng kí</button>
+                </div>
+            </div>
+        </Form>
+    </div>
+</div>
 </template>
 
 <script>
@@ -76,5 +83,36 @@ export default {
 </script>
 
 <style>
+.form-auth {
+    display: flex;
+    justify-content: center;
+}
+.form-container {
+    min-width: 35vw;
+}
+.flex-center {
+    display: flex;
+    justify-content: center;
+}
+.form-group {
+    padding: 8px;
+}
+.btn-login {
+    border-radius: 8px;
+    border: 1px solid;
+    border: #fcfafa;
+    background: #f5455f;
+    padding: 8px 24px;
+}
 
+.btn-login:hover {
+    border-radius: 8px;
+    border: #f5455f;
+    border: 1px solid;
+    background: #f7f2f2;
+    color: #f5455f;
+}
+.error-feedback {
+    color: red;
+}
 </style>

@@ -40,17 +40,18 @@
             </div>
         </div>
     </div>
-        <!-- <Footer /> -->
+        <Footer />
 </template>
 <script>
 import Header from "../components/Header.vue";
 import ItemCart from "../components/ItemCart.vue";
 import { mapGetters } from "vuex";
+import Footer from "../components/Footer.vue";
 
 export default {
     name:"Cart",
     components: {
-        Header, ItemCart
+        Header, ItemCart, Footer
     },
     computed: {
         ...mapGetters([
@@ -70,5 +71,8 @@ export default {
     display: flex;
     justify-content: center;
     padding: 24px;
+}
+.container {
+    min-height: 80vh;
 }
 </style>

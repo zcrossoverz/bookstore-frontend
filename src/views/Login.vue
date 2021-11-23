@@ -1,16 +1,17 @@
 <template>
-    
     <div class="container-fluid">
-        <Header />
+    <Header />
+    <div class="container">
         <div class="edit-form">
             <div v-if="message">{{ message }}</div>
-            <h4>Đăng nhap</h4>
+            <h5 class="flex-center h5-text-auth">Đăng nhập tài khoản</h5>
             <AuthForm
             :user="user"
             :isLogin="true"
             @user-submit="userLogin"
             />
         </div>
+    </div>
     </div>
     <Footer />
 </template>

@@ -1,34 +1,56 @@
 <template>
     <div class="item row">
-            <div class="col-md-4 cover">
-                cover
+            <div class="col-md-2 cover">
+                <img :src="item.product.product.cover" height="120" width="80" />
             </div>
-            <div class="col-md-6 info-item">
-                <div class="row">name</div>
-                <div class="row">id</div>
+            <div class="col-md-4 info-item">
+                {{ item.product.product.title }}
             </div>
-            <div class="col-md-2 number">
-                number
+            <div class="col-md-2 price-item">
+                {{ item.product.product.price }} vnđ
+            </div>
+            <div class="col-md-1 quantity">
+                {{ item.product.quantity }}
+            </div>
+            <div class="col-md-1 close" style="margin: 0 20px">
+                <ThemifyIcon icon="close"/>
+            </div>
+            <div class="col-md-2 amount" style="margin: -20px">
+                {{ item.product.product.price*item.product.quantity }} vnđ
             </div>
     </div>
 </template>
 
 <script>
+import ThemifyIcon from "vue-themify-icons";
+
 export default {
-    name:"ItemCard"
+    name:"ItemCard",
+    props: ["item"],
+    components: {
+        ThemifyIcon
+    }
 }
 </script>
 <style>
 .item {
-    padding: 0 16px;
+    margin: 0 16px;
+    display: flex;
 }
-.cover{
-    background: blue;
+.item-cover{
+
+    width: 12%;
 }
 .info-item{
-    background: orange;
+    padding: 24px;
+    justify-content: flex-start !important;
 }
-.number{
-    background: rebeccapurple;
+.quantity{
+    
+}
+.cover, .price-item, .info-item, .quantity, .close, .amount {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 </style>

@@ -11,7 +11,7 @@
                     <h5>Tac gia: {{ item.author }}</h5>
                     <p>{{ item.desc }}</p>
                     <p class="price">{{ item.price }} vnd</p>
-                    So luong <input type="number" value="0" min="0" max="20" step="1"/> <button type="button" class="btn btn-danger" @click="addToCart">Them vao gio hang</button>
+                    So luong <input type="number" v-model="quantity" min="0" max="20" step="1"/> <button type="button" class="btn btn-danger" @click="addToCart">Them vao gio hang</button>
                 </div>
                 
             </div>
@@ -22,6 +22,7 @@
 <script>
 import Header from "../components/Header.vue";
 // import Footer from "../components/Footer.vue";
+import { mapGetters } from "vuex";
 
 export default {
     name:"ViewItem",
@@ -34,6 +35,7 @@ export default {
     data() {
         return {
             item: null,
+            quantity: 1,
             items: [
                 {
                 title: "50 Ways to Draw Your Beautiful, Ordinary Life: Practical Lessons in",
@@ -91,14 +93,24 @@ export default {
     },
     methods: {
         addToCart(){
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            // cart.push({id})
-            console.log(cart);
+            if(this.quantity > 0){
+                this.$store.dispatch('addToCart', {
+                    product: this.item,
+                    quantity: this.quantity
+                });
+            }else{
+                alert('ko co don hang')
+            }
         }
+    },
+    computed: {
+        ...mapGetters([
+            "getProductInCart"
+        ]),
     },
     created() {
         this.item = this.items[this.$route.params.id-1];
-    }
+    },
 }
 </script>
 <style>

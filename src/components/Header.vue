@@ -11,7 +11,11 @@
           <router-link v-if="!currentUser" :to="`/register`" class="link">Đăng kí</router-link>
 
         <router-link :to="`/cart`">
-          <a class="cart"><ThemifyIcon icon="bag" class="icon-cart"/></a>
+          <a class="cart"><ThemifyIcon icon="bag" class="icon-cart"/>
+            <div class="cart-info">
+              <span class="cartCount">{{ getProductInCart.length }}</span>
+            </div>
+          </a>
         </router-link>
       </div>
     </div>
@@ -20,6 +24,7 @@
 
 <script>
 import ThemifyIcon from "vue-themify-icons";
+import { mapGetters } from "vuex";
 
 export default {
   name: 'Header',
@@ -28,14 +33,19 @@ export default {
   },
   data() {
     return {
-      currentUser: null
+      currentUser: null,
     };
   },
   methods: {
     logout() {
       console.log("logout");
     }
-  }
+  },
+  computed: {
+        ...mapGetters([
+            "getProductInCart"
+        ]),
+  },
 }
 </script>
 
@@ -70,6 +80,7 @@ export default {
   margin-top: 24px;
   margin-left: 16px;
   margin-right: 54px;
+  position: relative;
 }
 .cart {
   color: black;
@@ -89,5 +100,23 @@ export default {
 .search {
   width: 24%;
   height: 10%;
+}
+.cart-info {
+  position: absolute;
+    right: 68px;
+    top: 18px;
+    font-size: 11px;
+    background: #f2735c;
+    color: #fff;
+    padding: 0 3px;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    border-radius: 50%;
+}
+.cartCount {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>

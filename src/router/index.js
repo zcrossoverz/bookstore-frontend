@@ -4,6 +4,7 @@ import ViewItem from "../views/ViewItem";
 import Cart from "../views/Cart";
 import Register from "../views/Register";
 import Login from "../views/Login";
+import Dashboard from "../views/Dashboard";
 const routes = [
     {
         path: "/",
@@ -24,7 +25,11 @@ const routes = [
     {
         path: "/login",
         component: Login
-    }
+    },
+    {
+        path: "/dashboard",
+        component: Dashboard
+    },
 ];
 
 const router = createRouter({

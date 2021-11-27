@@ -5,7 +5,7 @@
         <input class="form-control ms-4 mt-3" type="search" placeholder="Search" aria-label="Search">
       </form>
       <router-link :to="`/`"><img :src="require(`../assets/Logo.png`)" height="65" alt="logo" class="logo"/></router-link>
-        <a v-if="loggedInUser" class="flex-center username-text" @click.prevent="logout"> {{ loggedInUser.username }} </a>
+        <router-link :to="`/dashboard`" v-if="loggedInUser" class="flex-center username-text"> {{ loggedInUser.username }} </router-link>
         <a v-if="loggedInUser" class="flex-center logout" @click.prevent="logout"> Đăng xuất </a>
       <div>
           <router-link v-if="!loggedInUser" :to="`/login`" class="link">Đăng nhập</router-link>

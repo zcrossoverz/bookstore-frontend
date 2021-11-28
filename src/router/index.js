@@ -6,6 +6,7 @@ import Register from "../views/Register";
 import Login from "../views/Login";
 import Dashboard from "../views/Dashboard";
 import UserEdit from "../views/UserEdit";
+import AdminDashboard from "../views/AdminDashboard";
 const routes = [
     {
         path: "/",
@@ -34,6 +35,10 @@ const routes = [
     {
         path: "/edit_information",
         component: UserEdit
+    },
+    {
+        path: "/admin",
+        component: AdminDashboard
     }
 ];
 

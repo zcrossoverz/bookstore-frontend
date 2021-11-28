@@ -29,7 +29,7 @@ const mutations = {
         localStorage.setItem("user", JSON.stringify(user));
     },
     logout(state) {
-        console.log("call logout");
+        console.log(" logout");
         state.status.loggedIn = false;
         state.user = null;
         localStorage.removeItem("user");

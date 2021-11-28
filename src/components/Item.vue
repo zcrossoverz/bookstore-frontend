@@ -1,6 +1,6 @@
 <template>
     <div class="card card-item" style="width: 14rem;">
-        <router-link :to="`/product/${item.id}`" style="text-decoration: none; color: inherit;">
+        <router-link :to="`/product/${item._id}`" style="text-decoration: none; color: inherit;">
         <img :src="`${item.cover}`" height="325" width="225" class="card-img-center cover" alt="...">
         <div class="card-body">
             <p class="card-title">{{ item.title }}</p>

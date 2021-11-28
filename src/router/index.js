@@ -5,6 +5,7 @@ import Cart from "../views/Cart";
 import Register from "../views/Register";
 import Login from "../views/Login";
 import Dashboard from "../views/Dashboard";
+import UserEdit from "../views/UserEdit";
 const routes = [
     {
         path: "/",
@@ -30,6 +31,10 @@ const routes = [
         path: "/dashboard",
         component: Dashboard
     },
+    {
+        path: "/edit_information",
+        component: UserEdit
+    }
 ];
 
 const router = createRouter({

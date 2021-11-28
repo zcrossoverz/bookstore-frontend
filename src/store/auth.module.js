@@ -6,7 +6,12 @@ const state = {
         id: String,
         username: String,
         email: String,
-        accessToken: String
+        accessToken: String,
+        address: String,
+        phone: String,
+        isAdmin: Boolean,
+        createAt: String,
+        updateAt: String
     },
     status: {
         loggedIn: Boolean
@@ -24,6 +29,7 @@ const mutations = {
         localStorage.setItem("user", JSON.stringify(user));
     },
     logout(state) {
+        console.log("call logout");
         state.status.loggedIn = false;
         state.user = null;
         localStorage.removeItem("user");
@@ -49,7 +55,7 @@ const actions = {
             }
             throw error;
         }
-
+        console.log("call login");
         commit("login", response.data);
         return response.data;
     },
@@ -68,7 +74,7 @@ const actions = {
             throw error;
         }
         return response.data;
-    }
+    },
 };
 
 const getters = {

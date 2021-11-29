@@ -82,8 +82,10 @@ export default {
   grid-gap: 16px;
 }
 .main-dashboard {
-  background: palegoldenrod;
+  border: 1px solid black;
+  border-radius: 8px;
   padding: 16px 24px;
+  margin: 12px;
 }
 .sidebar-dashboard {
 

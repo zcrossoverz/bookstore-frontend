@@ -7,6 +7,7 @@ import Login from "../views/Login";
 import Dashboard from "../views/Dashboard";
 import UserEdit from "../views/UserEdit";
 import AdminDashboard from "../views/AdminDashboard";
+import AddProduct from "../views/AddProduct";
 const routes = [
     {
         path: "/",
@@ -39,6 +40,10 @@ const routes = [
     {
         path: "/admin",
         component: AdminDashboard
+    },
+    {
+        path: "/add_product",
+        component: AddProduct
     }
 ];
 

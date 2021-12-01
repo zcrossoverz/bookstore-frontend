@@ -1,7 +1,7 @@
 import http from "../common/http";
 import store from "../store";
 
-class UserService {
+class OrderService {
   constructor() {
     http.interceptors.request.use(config => {
         const user = store.getters.loggedInUser;
@@ -12,15 +12,18 @@ class UserService {
     });     
   }
   
-  getAll() {
-    return http.get("/user/all");
+  addOrder(data) {
+    return http.post(`/cart/checkout`, data);
   }
-  update(id, data) {
-    return http.post(`/user/${id}`, data);
+  getOrder(username) {
+    return http.post(`/cart/get_order`, username);
   }
-  getInfo(username) {
-    return http.post(`/user/info`, username);
+  clearOrder(username) {
+    return http.post(`/cart/clear`, username);
+  }
+  getAllOrder() {
+    return http.get(`/cart/get_all_order`);
   }
   
 }
-export default new UserService();
+export default new OrderService();

@@ -29,7 +29,7 @@ export default {
     props: ["item"],
     components: {
         ThemifyIcon
-    }
+    },
 }
 </script>
 <style>

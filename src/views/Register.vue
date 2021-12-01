@@ -52,7 +52,7 @@ export default {
                 console.log(error);
                 this.message = "Đăng ký thất bại";
             } else {
-                this.message = "Dang ki thanh cong";
+                this.message = "Đăng ký thành công";
             }
         },
     },

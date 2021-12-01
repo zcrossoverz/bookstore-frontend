@@ -2,8 +2,13 @@
   <div class="header">
     <div class="menu">
       <form class="d-flex search">
-        <input class="form-control ms-4 mt-3" type="search" placeholder="Search" aria-label="Search">
+        <input class="form-control ms-4 mt-3" type="search" placeholder="Search" aria-label="Search" v-model="search">
       </form>
+        <div class="search-filter">
+          <div v-for="book in filterBook" :key="book.title">
+            <router-link :to="`/about/`">{{ book.title }}</router-link>
+          </div>
+        </div>
       <router-link :to="`/`"><img :src="require(`../assets/Logo.png`)" height="65" alt="logo" class="logo"/></router-link>
         <router-link :to="`/dashboard`" v-if="loggedInUser" class="flex-center username-text"> {{ loggedInUser.username }} </router-link>
         <a v-if="loggedInUser" class="flex-center logout" @click.prevent="logout"> Đăng xuất </a>
@@ -26,6 +31,7 @@
 <script>
 import ThemifyIcon from "vue-themify-icons";
 import { mapGetters, mapMutations } from "vuex";
+// import ProductService from "../services/Product.service";
 
 export default {
   name: 'Header',
@@ -35,6 +41,9 @@ export default {
   data() {
     return {
       currentUser: null,
+      search: "",
+      books: [],
+      idLookup: []
     };
   },
   methods: {
@@ -51,10 +60,25 @@ export default {
             "getProductInCart",
             "loggedInUser"
         ]),
+        filterBook(){
+          if(!this.search){
+            return [];
+          }else{
+            return this.books.filter(book => book.title.includes(this.search));
+          }
+        }
   },
   mounted() {
     this.initAuthState();
-  }
+  },
+  // created() {
+  //     this.handle(ProductService.getAllProduct())
+  //     .then(response => {
+  //       // console.log(response[1].data);
+  //       this.books = response[1].data;
+  //       console.log(this.books);
+  //     });
+  //   }
 }
 </script>
 
@@ -125,6 +149,7 @@ export default {
 .search {
   width: 24%;
   height: 10%;
+  opacity: 0;
 }
 .cart-info {
   position: absolute;
@@ -143,5 +168,11 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.search-filter {
+  z-index: 99;
+  display: flex;
+  width: 40px;
+  flex-direction: column;
 }
 </style>

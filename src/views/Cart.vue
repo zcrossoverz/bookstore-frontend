@@ -32,8 +32,14 @@
                         <tr v-for="item in getProductInCart" :key="item.product.product.id">
                             <ItemCart :item="item"/>
                         </tr>
+                        <tr>
+                            <div class="btn-checkout">
+                                Tổng số tiền: {{ amount }} vnđ
+                            </div>
+                        </tr>
                     </tbody>
                 </table>
+                <button @click="check_out" class="btn btn-danger btn-checkout">Thanh toán</button>
             </div>
             <div v-else class="error">
                 Giỏ hàng trống
@@ -57,6 +63,29 @@ export default {
         ...mapGetters([
             "getProductInCart"
         ]),
+    },
+    methods: {
+        async check_out(){
+            const [error, response] = await this.handle(
+                this.$store.dispatch("check_out")
+            );
+            if (error) {
+                console.log(error);
+                this.message = "Đăng nhập thất bại";
+            } else {
+                console.log(response);
+            }
+        }
+    },
+    data() {
+        return {
+            amount: 0
+        }
+    },
+    created(){
+        this.getProductInCart.forEach(e => {
+            this.amount += (e.product.product.price*e.product.quantity);
+        });
     }
 }
 </script>
@@ -74,5 +103,8 @@ export default {
 }
 .container {
     min-height: 80vh;
+}
+.btn-checkout{
+    float: right;
 }
 </style>

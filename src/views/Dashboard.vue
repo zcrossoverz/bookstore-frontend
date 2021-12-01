@@ -6,7 +6,7 @@
               <div class="sidebar-dashboard">
                   <ul class="list-group list-group-flush">
                     <button class="list-group-item" :key="1" :class="{ active: index == 1 }" @click="setActive(1)">Thông tin cá nhân</button>
-                    <button class="list-group-item" :key="2" :class="{ active: index == 2 }" @click="setActive(2)">Đơn hàng của bạn</button>
+                    <button class="list-group-item" v-if="!loggedInUser.isAdmin" :key="2" :class="{ active: index == 2 }" @click="setActive(2)">Đơn hàng của bạn</button>
                   </ul>
               </div>
               <div class="main-dashboard">
@@ -20,7 +20,7 @@
                   <div v-if="index == 2">
                     <h5>Thông tin các đơn hàng của bạn</h5>
                     <ul v-for="order in orders" :key="order.id">
-                      <li>{{order.title}}</li>
+                      <ItemOrder :item="order"/>
                     </ul>
                   </div>
               </div>
@@ -34,6 +34,8 @@
 import Footer from "../components/Footer.vue";
 import Header from "../components/Header.vue";
 import { mapGetters } from "vuex";
+import OrderService from "../services/Order.service";
+import ItemOrder from "../components/ItemOrder.vue";
 
 export default {
     name: "Dashboard",
@@ -41,26 +43,11 @@ export default {
         return {
           index: 1,
           orders: [
-            {
-              title:"sach 1",
-              cover:"",
-              id:1
-            },
-            {
-              title:"sach 2",
-              cover:"",
-              id:2
-            },
-            {
-              title:"sach 3",
-              cover:"",
-              id:3
-            }
           ]
         };
     },
     components: {
-      Header, Footer
+      Header, Footer, ItemOrder
     },
     computed: {
         ...mapGetters([
@@ -71,6 +58,11 @@ export default {
       setActive(index){
         this.index = index;
       }
+    },
+    created(){
+      OrderService.getOrder({
+        username: this.loggedInUser.username
+      }).then(response => this.orders = response.data.order);
     }
 }
 </script>
@@ -89,5 +81,8 @@ export default {
 }
 .sidebar-dashboard {
 
+}
+.container{
+  margin-bottom: 12px;
 }
 </style>
